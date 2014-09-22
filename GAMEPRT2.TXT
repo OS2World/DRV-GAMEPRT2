@@ -1,0 +1,92 @@
+GAMEPRT2.SYS is an OS2 joystick interface driver.
+It is an updated version of GAMEPORT.SYS.
+
+--------------------
+Installation:
+1)Insert GAMEPRT2.SYS in your OS2 directory.
+2)If you already have GAMEPORT.SYS installed, please change the
+  CONFIG.SYS file so that the line which has:
+  DEVICE=C:\OS2\GAMEPORT.SYS
+  ...is changed to...
+  DEVICE=C:\OS2\GAMEPRT2.SYS
+3)If you do not have GAMEPORT.SYS installed, then insert
+  DEVICE=C:\OS2\GAMEPRT2.SYS in your CONFIG.SYS file, where C is
+  likely the drive where your OS2 directory is found.
+4)Add command line options if required, for example:
+  DEVICE=C:\OS2\GAMEPRT2.SYS			<--default value
+  or
+  DEVICE=C:\OS2\GAMEPRT2.SYS /VB /P:201 /W:7D0	<--also default
+
+Where:
+  /VB displays the gameport header at startup.
+  /P:hhhh is the joystick port (hhhh=hex address of port)
+  /W:hhhh is the wait run-a-way counter (hhhh=waiting time).
+
+The joystick port is unlikely to be found at another location,
+so the /P:201 is set as the default value.
+
+The /W option may come in useful if you run a very fast computer
+and find that the joystick can't be found.
+
+If you can't find the joystick, I recommend increasing the value
+of /W:hhhh a little at a time, don't put a large value like
+/W:FFFF since you may find your computer running very slow.
+
+For myself 7D0 as per the original program is more than adequate
+since I get maximum values of 172 (so in my case I would want to
+drop the value down to /W:1BC so that my machine doesn't sit idle
+in the gameport polling loop).
+
+If you want to set the /W option, then run JOY_PORT.EXE and move
+your joystick back-n-forth to see what values come back. Then add
+something like 10%-20% to the value as a safety margin to make sure
+the joystick is read every time. For example, my gamepad gives a
+maximum of 172, so /W:1BC is a good value.
+
+--------------------
+Who did what:
+GAMEPORT.SYS by Frank Ivan, ICA Systems Group
+See GAMEPT.ZIP for original GAMEPORT.SYS joystick driver
+
+GAMEPRT2.SYS by Jose DaSilva, Vancouver, BC, Canada
+based on GAMEPORT.SYS driver
+
+GAMEPRT2.DOC = This file
+GAMEPRT2.SYS = OS2 joystick device driver
+GAMEPRT2.ASM = Updated version of GAMEPORT.ASM
+GAMEPRT2.BAT = DOS batch file to create GAMEPRT2.SYS
+JOY_PORT.EXE = Test program for GAMEPORT.SYS or GAMEPRT2.SYS
+JOY_PORT.CPP = Example source code for JOY_PORT.EXE
+
+--------------------
+Compatibility Chart:
+
+1989,1992	1999,2000
+GAMEPT.ZIP	GAMEPRT2.ZIP
+GAMEPORT.SYS--->GAMEPRT2.SYS--------+
+Frank Ivan	Jose DaSilva	    |		^ 286 or better
+				    V		-----------
+19??,1995			1999,2000	v 386 or better
+JOYSTICK.ZIP,JOYDOCS.ZIP	GAMEDD2.ZIP
+GAMEDD.SYS--------------------->GAMEDD.SYS
+GAMEVDD.SYS-------------------->(use original GAMEVDD.SYS)
+IBM, ver2.0			Jose Da Silva
+
+This chart lets you know that GAMEPRT2.SYS is compatible to
+GAMEPORT.SYS, but not with the standard gameport driver
+written by IBM named GAMEDD.SYS and GAMEVDD.SYS
+
+GAMEDD.SYS located within GAMEDD2.ZIP is compatible with
+GAMEPORT.SYS, GAMEPRT2.SYS and IBM's GAMEDD.SYS so if you
+are running a machine better than a 80286, you may decide
+to use the updated GAMEDD.SYS instead.
+
+--------------------
+History:
+Jul 01,2000 1.2 update and add gameprt2.asm, Joy_Port.cpp
+Jun 25,2000	Created Joy_Port.cpp to test GAMEPRT2.SYS
+Jun 07,2000	Added compatibility chart to documentation
+Dec 11,1999 1.1 Initial version 1.10 of GAMEPRT2.SYS
+
+Have fun and enjoy
+
